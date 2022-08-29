@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <div class="container">
+            <small class="save">saved</small>
+            <div class="header">
+                <a href="./index.html" class="nav-brand text">calc</a>
+                <div class="nav-theme">
+                    <div class="theme-body">
+                        <div class="theme-group">
+                            <div>
+                                <span class="theme text">1</span>
+                                <span class="theme text">2</span>
+                                <span class="theme text">3</span>
+                            </div>
+                        </div>
+                        <div class="theme-scroll">
+                            <span class="text theme-title">theme</span>
+                            <div class="theme-overlay">
+                                <span class="bubble"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <div class="calc-screen">
+                    <span class="screen-input text">0</span>
+                    <span class="sign"></span>
+                </div>
+                <div class="calc-buttons">
+                    <div class="input-buttons">
+                        <div class="btn num-btn num" id="7">
+                            <span class="text">7</span>
+                        </div>
+                        <div class="btn num-btn num" id="8">
+                            <span class="text">8</span>
+                        </div>
+                        <div class="btn num-btn num" id="9">
+                            <span class="text">9</span>
+                        </div>
+                        <div class="btn reset-del-btn" id="del-btn">
+                            <span>DEL</span>
+                        </div>
+                        <div class="btn num-btn num" id="4">
+                            <span class="text">4</span>
+                        </div>
+                        <div class="btn num-btn num" id="5">
+                            <span class="text">5</span>
+                        </div>
+                        <div class="btn num-btn num" id="6">
+                            <span class="text">6</span>
+                        </div>
+                        <div class="btn num-btn" id="opt-btn" data-id="+">
+                            <span class="text">+</span>
+                        </div>
+                        <div class="btn num-btn num" id="1">
+                            <span class="text">1</span>
+                        </div>
+                        <div class="btn num-btn num" id="2">
+                            <span class="text">2</span>
+                        </div>
+                        <div class="btn num-btn num" id="3">
+                            <span class="text">3</span>
+                        </div>
+                        <div class="btn num-btn " id="opt-btn" data-id="-">
+                            <span class="text">-</span>
+                        </div>
+                        <div class="btn num-btn num" id=".">
+                            <span class="text">.</span>
+                        </div>
+                        <div class="btn num-btn num" id="0">
+                            <span class="text">0</span>
+                        </div>
+                        <div class="btn num-btn" id="opt-btn" data-id="/">
+                            <span class="text">/</span>
+                        </div>
+                        <div class="btn num-btn" id="opt-btn" data-id="*">
+                            <span class="text">x</span>
+                        </div>
+                    </div>
+                    <div class="operation-buttons">
+                        <div class="btn reset-del-btn" id="reset-btn">
+                            <span>RESET</span>
+                        </div>
+                        <div class="btn solve-btn">
+                            <span>=</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="./app.js"></script>
+</body>
+</html>
