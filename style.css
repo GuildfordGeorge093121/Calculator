@@ -39,6 +39,10 @@ a{
     /* transition: opacity ; */
 }
 
+.overflow{
+    font-size: 40px;
+}
+
 /* Header */
 .header{
     display: flex;
@@ -156,9 +160,9 @@ a{
     .calc-buttons{
         gap:.9vh
     }
-    .calc-screen .text{
+    /* .calc-screen .text{
         font-size: 40px;
-    }
+    } */
     .calc-buttons{
         padding: 24px;
     }
@@ -310,7 +314,7 @@ a{
     background-color: #1E0936;
 }
 .violet .bubble{
-    right: 5px;
+    left: 50px;
     background-color: #00DED0;
     transition: all .3s;
 }

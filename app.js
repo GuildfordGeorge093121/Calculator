@@ -14,19 +14,18 @@ const optBtns=document.querySelectorAll('#opt-btn')
 const solvebtn=document.querySelector('.solve-btn')
 const resetBtn=document.querySelector('#reset-btn')
 const delBtn=document.querySelector('#del-btn')
-const themeOverlay=document.querySelector('.theme-overlay')
-
-
-bubble.addEventListener('click', ()=>{
-    ++themeSelect;
-    if(themeSelect>2){
-        themeSelect=0
-    }
-    section.setAttribute('class', theme[themeSelect])
+const themebtns=document.querySelectorAll('.theme')
+themebtns.forEach((btn,index)=>{
+    btn.addEventListener('click',()=>{
+        themeSelect=index
+        section.setAttribute('class',theme[themeSelect])
+    })
 })
-themeOverlay.addEventListener('dblclick',()=>{
+
+bubble.addEventListener('click',()=>{
     localStorage.setItem("calctheme1.0", theme[themeSelect])
     document.querySelector('.save').classList.add('show-save')
+    document.querySelector('.save').innerHTML='saved'
     setTimeout(()=>{
         document.querySelector('.save').classList.remove('show-save')
     },1000)
@@ -40,6 +39,8 @@ window.addEventListener('load',()=>{
         section.setAttribute('class', theme[themeSelect])
     }
 })
+
+// KeyBoard Event
 window.addEventListener('keyup', (e)=>{
     const btnsSym=['1','2','3','4','5','6','7','8','9','0','.']
     const optSym=['/','+','-','*']
@@ -118,39 +119,48 @@ resetBtn.addEventListener('click',resetFunc)
 delBtn.addEventListener('click',delFunc)
 
 function inputFunc(id){
-    
-    if(id==='.'){
-        if(!(/\./.test(screen))){
-            screen+=id;
-            inputValue=Number(screen);
-            screenInput.innerHTML+=id
-        }
-    }
-    else if(id==='0'){
-        if(/\./.test(screen)){
-            screen+=id;
-            inputValue=Number(screen);
-            screenInput.innerHTML+=id
-        }
+    if(screen.length<16){
 
+        if(id==='.'){
+            if(!(/\./.test(screen))){
+                screen+=id;
+                inputValue=Number(screen);
+                screenFormat(screen)
+            }
+        }
+        else if(id==='0'){
+            if(/\./.test(screen)){
+                screen+=id;
+                inputValue=Number(screen);
+                screenInput.innerHTML+=id
+            }
+    
+            else{
+                screen+=id;
+                inputValue=Number(screen);
+                screenFormat(inputValue.toLocaleString('en',{maximumFractionDigits:5}))
+            }
+        }
+        else if(id==='-'){
+            screen+=id;
+            inputValue=Number(screen);
+            screenFormat(screen)
+        }
         else{
             screen+=id;
             inputValue=Number(screen);
-            screenInput.innerHTML=inputValue.toLocaleString('en',{maximumFractionDigits:5});
+            screenFormat(inputValue.toLocaleString('en',{maximumFractionDigits:5}))
         }
-    }
-    else if(id==='-'){
-        screen+=id;
-        inputValue=Number(screen);
-        screenInput.innerHTML=screen
+        prevScreen=screen
+        
     }
     else{
-        screen+=id;
-        inputValue=Number(screen);
-        screenInput.innerHTML=inputValue.toLocaleString('en',{maximumFractionDigits:5});
+        document.querySelector('.save').classList.add('show-save')
+        document.querySelector('.save').innerHTML='T00 MUCH INPUT'
+        setTimeout(()=>{
+            document.querySelector('.save').classList.remove('show-save')
+        },1000)
     }
-    prevScreen=screen
-    
 }
 
 function solveFunc(){
@@ -180,7 +190,7 @@ function solveFunc(){
     prevScreen=screen;
     screen='';
     document.querySelector('.sign').innerHTML='='
-    screenInput.innerHTML=result.toLocaleString('en',{maximumFractionDigits:5});
+    screenFormat(result.toLocaleString('en',{maximumFractionDigits:5}))
 }
 
 function resetFunc(){
@@ -190,25 +200,24 @@ function resetFunc(){
     screen='';
     selectedOpt=''
     document.querySelector('.sign').innerHTML=''
-    screenInput.innerHTML=result
+    screenFormat(result)
+    screenInput.style.fontSize=`56px`
 }
 
 function delFunc(){
-    console.log(inputValue)
     screen=`${inputValue}`
     screen= screen.slice(0,screen.length-1);
-    console.log(screen)
     inputValue=Number(screen);
-    console.log(screen)
     document.querySelector('.sign').innerHTML=""
+    screenInput.style.fontSize=`56px`
     if(screen===""){
-        screenInput.innerHTML=0;
+        screenFormat(0)
     }
     else if(screen==='-'){
-        screenInput.innerHTML=screen;
+        screenFormat(screen)
     }
     else{
-        screenInput.innerHTML=inputValue.toLocaleString('en');
+        screenFormat(inputValue.toLocaleString('en'))
     }
 
 }
@@ -225,5 +234,14 @@ function optFunc(id){
     }
     else{
         document.querySelector('.sign').innerHTML=id
+    }
+}
+
+function screenFormat(str){
+    screenInput.innerHTML=str
+    let mainScreenWidth=document.querySelector('.calc-screen').getBoundingClientRect().width-60;
+    let screenWidth=document.querySelector('.screen-input').getBoundingClientRect().width
+    if(screenWidth>mainScreenWidth){
+        screenInput.style.fontSize=`40px`
     }
 }
