@@ -1,4 +1,4 @@
-const theme=['purple','light','violet'];
+const theme=['theme-1','theme-2','theme-3'];
 let themeSelect=0
 let screen=''
 let prevScreen=''
@@ -76,11 +76,11 @@ optBtns.forEach((btn)=>{
         let id=btn.dataset.id;
 
         if(prevScreen==='' && id==='-'){
-            console.log(1)
+            //inputing negative number
             inputFunc(id)
         }
         else if(selectedOpt==="" && screen!=="" && id==='-'){
-            console.log(2)
+            //performing subtraction operation
             if(!isNaN(Number(screen))){
                 optFunc(id)
 
@@ -88,20 +88,20 @@ optBtns.forEach((btn)=>{
         }
 
         else if(selectedOpt==="" && screen!==""){
-            console.log(3)
+            //performing anyother operation
             if(!isNaN(Number(screen))){
                 optFunc(id)
             }
         }
         else if(selectedOpt!==""){
-            console.log(4)
+            //performing next operation after previous operation
             if(!isNaN(Number(screen))){
                 solveFunc()
                 optFunc(id)
             }
         }
         else{
-            console.log(5)
+            //Just don't know what I have missed
             if(!isNaN(Number(screen))){
                 optFunc(id)
             }
@@ -112,6 +112,7 @@ optBtns.forEach((btn)=>{
 
 
 solvebtn.addEventListener('click',()=>{
+    //solving math operation
     solveFunc()
     selectedOpt=""
 })
@@ -156,7 +157,7 @@ function inputFunc(id){
     }
     else{
         document.querySelector('.save').classList.add('show-save')
-        document.querySelector('.save').innerHTML='T00 MUCH INPUT'
+        document.querySelector('.save').innerHTML='T00 MANY INPUT'
         setTimeout(()=>{
             document.querySelector('.save').classList.remove('show-save')
         },1000)
@@ -201,7 +202,7 @@ function resetFunc(){
     selectedOpt=''
     document.querySelector('.sign').innerHTML=''
     screenFormat(result)
-    screenInput.style.fontSize=`56px`
+    document.querySelector('.screen-input').id=""
 }
 
 function delFunc(){
@@ -209,7 +210,7 @@ function delFunc(){
     screen= screen.slice(0,screen.length-1);
     inputValue=Number(screen);
     document.querySelector('.sign').innerHTML=""
-    screenInput.style.fontSize=`56px`
+    document.querySelector('.screen-input').id=""
     if(screen===""){
         screenFormat(0)
     }
@@ -239,9 +240,17 @@ function optFunc(id){
 
 function screenFormat(str){
     screenInput.innerHTML=str
-    let mainScreenWidth=document.querySelector('.calc-screen').getBoundingClientRect().width-60;
+    let mainScreenWidth=document.querySelector('.calc-screen').getBoundingClientRect().width-30;
     let screenWidth=document.querySelector('.screen-input').getBoundingClientRect().width
     if(screenWidth>mainScreenWidth){
-        screenInput.style.fontSize=`40px`
+        // screenInput.style.fontSize=`40px`
+        console.log('in')
+        if(document.querySelector('.screen-input').id!=='overflow'){
+            document.querySelector('.screen-input').id='overflow'
+        }
     }
 }
+
+// function mediaQueryFunc(){
+
+// }
