@@ -126,7 +126,7 @@ function inputFunc(id){
             if(!(/\./.test(screen))){
                 screen+=id;
                 inputValue=Number(screen);
-                screenFormat(screen)
+                screenFormat(document.querySelector('.screen-input').innerHTML+=id)
             }
         }
         else if(id==='0'){
